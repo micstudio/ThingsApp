@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
+import { connect } from 'react-redux';
+import { getPizza } from '../actions/itemAction';
+import PropTypes from 'prop-types';
 
 class PizzaList extends Component {
-  state = {
-    items: [
-      { id: uuid(), name: 'EGGS' },
-      { id: uuid(), name: 'SALAMI' },
-      { id: uuid(), name: 'KASE' },
-      { id: uuid(), name: 'MULE' },
-    ],
-  };
+
+  componentDidMount(){
+    this.props.getPizza();
+  }
+  
   render() {
+    
+    const { items } = this.props.item;
     return (
       <Container>
         <Button
@@ -31,8 +33,8 @@ class PizzaList extends Component {
         </Button>
 
         <ListGroup>
-          <TransitionGroup className="shopping-list">
-            {this.state.items.map(({ name, id, desc }) => (
+          <TransitionGroup>
+            {items.map(({ name, id, desc }) => (
                <CSSTransition key={id} timeout={500} classNames="fade">
                <ListGroupItem>
                    <Button 
@@ -58,4 +60,12 @@ class PizzaList extends Component {
   }
 }
 
-export default PizzaList;
+PizzaList.propTypes = {
+  getPizza: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  item: state.item
+})
+export default connect(mapStateToProps, { getPizza })(PizzaList);
