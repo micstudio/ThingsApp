@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
+import { connect } from 'react-redux';
+import {removeItem} from '../actions/index';
 
-class PizzaList extends Component {
-  state = {
-    items: [
-      { id: uuid(), name: 'EGGS' },
-      { id: uuid(), name: 'SALAMI' },
-      { id: uuid(), name: 'KASE' },
-      { id: uuid(), name: 'MULE' },
-    ],
-  };
-  render() {
-    return (
-      <Container>
+const PizzaList = (props) => {
+
+  const { removeItem } = props;
+  
+  return (
+    <Container>
         <Button
           color="dark"
           style={{ marginBottom: '2rem' }}
@@ -29,21 +25,16 @@ class PizzaList extends Component {
         >
           ADD PIZZA DETAL
         </Button>
-
         <ListGroup>
-          <TransitionGroup className="shopping-list">
-            {this.state.items.map(({ name, id, desc }) => (
+          <TransitionGroup >
+            {props.items2.map(({ name, id, desc }) => (
                <CSSTransition key={id} timeout={500} classNames="fade">
                <ListGroupItem>
                    <Button 
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={() => {
-                        this.setState(state => ({
-                            items: state.items.filter(item => item.id !== id)
-                        }))
-                    }}
+                     onClick={() => removeItem(id)}
                     >
                         &times;
                     </Button>
@@ -54,8 +45,17 @@ class PizzaList extends Component {
           </TransitionGroup>
         </ListGroup>
       </Container>
-    );
-  }
-}
+  );
+};
 
-export default PizzaList;
+
+const mapDispatchToProps = dispatch => ({
+  removeItem: (a)   => dispatch(removeItem(a))
+})
+
+const mapStateToProps = state => {
+  const {items3} = state;
+  return { items2 : items3};
+};
+export default connect(mapStateToProps,mapDispatchToProps)(PizzaList);
+
