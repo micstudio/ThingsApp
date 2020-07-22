@@ -5,3 +5,10 @@ export const removeItem = (id) => {
         txt: 'lol'
     }
 }
+
+export const addItem = (item) => {
+    return {
+        type: 'ADD_ITEM',
+        payload: item
+    }
+}

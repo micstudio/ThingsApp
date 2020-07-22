@@ -1,30 +1,21 @@
-import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import React, { Component, useState, useEffect  } from 'react';
+import { Container, ListGroup, ListGroupItem, Button, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import {removeItem} from '../actions/index';
+import BookInput from './BookInput';
 
 const PizzaList = (props) => {
 
+
   const { removeItem } = props;
+
+ 
   
   return (
     <Container>
-        <Button
-          color="dark"
-          style={{ marginBottom: '2rem' }}
-          onClick={() => {
-            const name = prompt('enter item');
-            if (name) {
-              this.setState((state) => ({
-                items: [...state.items, { id: uuid(), name }],
-              }));
-            }
-          }}
-        >
-          ADD PIZZA DETAL
-        </Button>
+      <BookInput />
+        
         <ListGroup>
           <TransitionGroup >
             {props.items2.map(({ name, id, desc }) => (
