@@ -3,10 +3,14 @@ import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
-import { getPizza } from '../actions/itemAction';
+import { getPizza, deleteItem } from '../actions/itemAction';
 import PropTypes from 'prop-types';
 
 class PizzaList extends Component {
+
+  onDeleteClick = (id) => {
+    this.props.deleteItem(id);
+  }
 
   componentDidMount(){
     this.props.getPizza();
@@ -41,11 +45,7 @@ class PizzaList extends Component {
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={() => {
-                        this.setState(state => ({
-                            items: state.items.filter(item => item.id !== id)
-                        }))
-                    }}
+                    onClick={this.onDeleteClick.bind(this, id)}
                     >
                         &times;
                     </Button>
@@ -68,4 +68,5 @@ PizzaList.propTypes = {
 const mapStateToProps = (state) => ({
   item: state.item
 })
-export default connect(mapStateToProps, { getPizza })(PizzaList);
+export default connect(mapStateToProps,
+   { getPizza, deleteItem  })(PizzaList);
