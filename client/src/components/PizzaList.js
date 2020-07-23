@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, ListGroup,Input, ListGroupItem, Button, Form } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
-import { getPizza, deleteItem } from '../actions/itemAction';
+import { getPizza, deleteItem, addItem } from '../actions/itemAction';
 import PropTypes from 'prop-types';
 
 class PizzaList extends Component {
 
+  state = {
+    value: '',
+  }
+
+  handlerInput = (e) => {
+   this.setState( {
+     value: e.target.value
+   })
+  }
   onDeleteClick = (id) => {
     this.props.deleteItem(id);
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+
+    const newItem = {
+      id: uuid(),
+      name: this.state.value
+    }
+
+    this.props.addItem(newItem);
   }
 
   componentDidMount(){
@@ -21,21 +41,12 @@ class PizzaList extends Component {
     const { items } = this.props.item;
     return (
       <Container>
-        <Button
-          color="dark"
-          style={{ marginBottom: '2rem' }}
-          onClick={() => {
-            const name = prompt('enter item');
-            if (name) {
-              this.setState((state) => ({
-                items: [...state.items, { id: uuid(), name }],
-              }));
-            }
-          }}
-        >
-          ADD PIZZA DETAL
-        </Button>
-
+        {this.state.value || ''}
+        <Form onSubmit={this.onSubmit}>
+          <Input onChange={this.handlerInput} />
+        </Form>
+        
+      
         <ListGroup>
           <TransitionGroup>
             {items.map(({ name, id, desc }) => (
@@ -69,4 +80,4 @@ const mapStateToProps = (state) => ({
   item: state.item
 })
 export default connect(mapStateToProps,
-   { getPizza, deleteItem  })(PizzaList);
+   { getPizza, deleteItem, addItem })(PizzaList);
