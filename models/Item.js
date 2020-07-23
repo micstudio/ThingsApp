@@ -18,4 +18,4 @@ const ItemsSchema = new Schema({
     }
 });
 
-module.exports = Item = mongoose.model('menu', ItemsSchema);
+module.exports = Item = mongoose.model('gazeta', ItemsSchema);
