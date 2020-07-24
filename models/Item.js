@@ -8,10 +8,10 @@ const ItemsSchema = new Schema({
         type: String,
         required: true
     },
-    hot: {
-        type: String,
-        required: true
-    },
+    // hot: {
+    //     type: String,
+    //     required: true
+    // },
     date: {
         type:Date,
         default: Date.now

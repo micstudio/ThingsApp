@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, ListGroup,Input, ListGroupItem, Button, Form } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import { getPizza, deleteItem, addItem } from '../actions/itemAction';
 import PropTypes from 'prop-types';
@@ -25,10 +24,9 @@ class PizzaList extends Component {
     e.preventDefault()
 
     const newItem = {
-      id: uuid(),
       name: this.state.value
     }
-
+    alert('additem z pizzalist')
     this.props.addItem(newItem);
   }
 

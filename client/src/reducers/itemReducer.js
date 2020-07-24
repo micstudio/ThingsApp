@@ -14,6 +14,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case ADD_ITEM:
+    alert('additem z reducers');
     return {
       ...state,
       items: [
@@ -22,7 +23,6 @@ export default function (state = initialState, action) {
       ]
     };
     case GET_ITEMS:
-    alert('get items');
       return {
         ...state,
         items: action.payload,
