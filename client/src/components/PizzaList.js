@@ -26,7 +26,6 @@ class PizzaList extends Component {
     const newItem = {
       name: this.state.value
     }
-    alert('additem z pizzalist')
     this.props.addItem(newItem);
   }
 
@@ -47,14 +46,14 @@ class PizzaList extends Component {
       
         <ListGroup>
           <TransitionGroup>
-            {items.map(({ name, id, desc }) => (
-               <CSSTransition key={id} timeout={500} classNames="fade">
+            {items.map(({ name, _id, desc }) => (
+               <CSSTransition key={_id} timeout={500} classNames="fade">
                <ListGroupItem>
                    <Button 
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={this.onDeleteClick.bind(this, id)}
+                    onClick={this.onDeleteClick.bind(this, _id)}
                     >
                         &times;
                     </Button>
