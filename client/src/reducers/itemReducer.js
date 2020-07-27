@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
@@ -9,6 +8,7 @@ const initialState = {
     // { id: uuid(), name: 'lol' },
   ],
   loading: false,
+  kozi: 'kozi2'
 };
 
 export default function (state = initialState, action) {

@@ -1,25 +1,24 @@
 const { request } = require("express");
 
-
+const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 
-const item = require('./routes/api/item');
 
 const app = express();
 
 //Bodyparser Middleware
-app.use(bodyParser.json())
+app.use(express.json())
 
 //DB CONFIG
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI')
 
 //connect to Mongo
 mongoose.connect(db, 
     { 
         useNewUrlParser: true,
-        useUnifiedTopology: true 
+        useUnifiedTopology: true,
+        useCreateIndex: true,
     })
     .then(() => {
         console.log("MongoDB Connected..");
@@ -27,7 +26,14 @@ mongoose.connect(db,
     .catch( err => console.log(err));
     
 // USE routes
+const item = require('./routes/api/item');
 app.use('/api/item', item);
+
+const user = require('./routes/api/User');
+app.use('/api/user', user);
+
+const auth = require('./routes/api/Auth');
+app.use('/api/auth', auth);
 
 const port = process.env.PORT || 5000;
 
