@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM,ITEMS_LOADING } from '../actions/types';
+import { tokenConfig } from './authActions';
+import { returnErrors} from './errorActions'
 
 export const getPizza = () => dispatch => {
     dispatch(setItemsLoading());
@@ -10,8 +12,8 @@ export const getPizza = () => dispatch => {
         payload: res.data
     }))
 } 
-export const addItem = (item) => dispatch => {
-  axios.post('/api/item',item)
+export const addItem = (item) => (dispatch, getState) => {
+  axios.post('/api/item',item, tokenConfig(getState))
   .then(res => dispatch({
     type: ADD_ITEM,
     payload: res.data
@@ -19,8 +21,8 @@ export const addItem = (item) => dispatch => {
 
 } 
 
-export const deleteItem = (id) => dispatch => {
-    axios.delete(`/api/item/${id}`)
+export const deleteItem = (id) => (dispatch, getState) => {
+    axios.delete(`/api/item/${id}`, tokenConfig(getState))
         .then(res => dispatch({
             type: DELETE_ITEM,
             payload: id

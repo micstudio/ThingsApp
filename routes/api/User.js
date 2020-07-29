@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 //Item Model
 const User = require('../../models/User');
 
-// @route   GET API/users
+// @route   POST API/users
 // @desc    regster new user
 // @access  Public
 router.post('/', (req, res) => {
@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
 
   //validation
   if (!name || !email || !password) {
-    return res.status(400).json({ msg: 'Please enter all fields' });
+    return res.status(400).json({ msg: '!1Please enter all fields' });
   }
 
   // check for existing user

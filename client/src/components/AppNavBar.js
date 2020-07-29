@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import {
   Collapse,
   Navbar,
@@ -16,42 +18,63 @@ import {
 
 import RegisterModal from './auth/RegisterModal';
 import Logout from '../components/auth/Logout';
+import Login from '../components/auth/LoginModal';
 
-const Example = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
 
-  return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <RegisterModal />
-            </NavItem>
-            <NavItem>
+class AppNavBar extends Component {
+
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+  };
+  
+  render() {
+    const { isAuthenticated, user } = this.props.auth
+    
+    const authLink = (
+      <Fragment>
+        <NavItem>
+          <span className="navbar-text mr-3">
+            <strong>{ user ? `WELCOME ${user.name}` : null }</strong>
+          </span>
+        </NavItem>
+        <NavItem>
               <Logout />
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+      </Fragment>
+    )
+
+    const guestLinks = (
+      <Fragment>
+         <NavItem>
+              <Login />
+            </NavItem> <NavItem>
+              <RegisterModal />
+            </NavItem>
+      </Fragment>
+    )
+    return (
+      
+      <div>
+      {console.log(isAuthenticated)}
+        
+      <Navbar color="light" light expand="md">
+        <NavbarToggler />
+        <Collapse  navbar>
+          <Nav className="mr-auto" navbar>
+            {isAuthenticated ? authLink : guestLinks}
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
     </div>
-  );
-};
+    );
+  }
+  
+}
 
-export default Example;
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps,null)(AppNavBar);
