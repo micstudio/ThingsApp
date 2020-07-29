@@ -1,0 +1,120 @@
+
+
+body {
+  overflow-x: hidden; //horizontal
+  overflow-y: hidden; //vertical
+
+}
+
+.container, .col-3, .col-9, .col-md-8, .col-md-4 {
+  margin:0 !important;
+  padding: 0 !important;
+}
+
+.remove-btn {
+  margin-right: 0.5rem;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
+}
+
+.modal-login {
+  width: 400px !important;
+  display: flex;
+  justify-content: center;
+  color: grey;
+}
+
+.modal-login h5 {
+  font-size: 0.9rem;
+}
+
+.modal-login input {
+  width: 85%;
+  margin: 5px auto;
+}
+
+.sidebar {
+  margin:0 !important;
+  padding: 0 !important;
+  height: 100vh;
+  background: #383c49;
+  color:white;
+  position: relative;
+  top:-10px;
+
+
+  &__logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+    text-transform: uppercase;
+    font-size: 3rem;
+  }
+
+  &::after {
+    content: '';
+    background: url('../../client/src/assets/bg-ico.jpg');
+    opacity: 0.07;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    overflow-y: scroll; //vertical
+  }
+
+  .items {
+    width: 100vw;
+  }
+  .sidebar {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+
+    
+    &::after {
+      content: '';
+      background: url('../../client/src/assets/bg-ico.jpg');
+      opacity: 0.07;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+}
+
+.input-100 {
+  width: 100vw !important;
+  margin-bottom: 20px;
+  input, input:focus {
+    background: #f3f3f3;
+    padding: 50px;
+    font-size: 3rem;
+  }
+}
+
