@@ -1,26 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
-
 import RegisterModal from './auth/RegisterModal';
 import Logout from './auth/Logout';
-import Login from './auth/LoginModal';
 import userface from '../assets/user-face.png';
-import logomain from '../assets/logo-main.png';
 
 class AppNavBar extends Component {
   static propTypes = {

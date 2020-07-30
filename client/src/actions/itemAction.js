@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM,ITEMS_LOADING } from '../actions/types';
 import { tokenConfig } from './authActions';
-import { returnErrors} from './errorActions'
 
 export const getPizza = () => dispatch => {
     dispatch(setItemsLoading());

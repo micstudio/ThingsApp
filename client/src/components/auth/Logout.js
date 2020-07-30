@@ -13,7 +13,7 @@ class Logout extends Component {
         return (
             <Fragment>
                 <NavLink onClick={this.props.logout} >
-                    <a href=""><img className="pt-3" src={logoutIco} alt="logout" /></a>
+                    <a href="/"><img className="pt-3" src={logoutIco} alt="logout" /></a>
                 </NavLink>
             </Fragment>
         );

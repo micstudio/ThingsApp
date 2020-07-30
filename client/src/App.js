@@ -3,7 +3,7 @@ import AppBar from './components/AppBar';
 
 import { Provider } from 'react-redux';
 import store from './store';
-import { loadUser } from './actions/authActions';
+// import { loadUser } from './actions/authActions';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
@@ -13,9 +13,9 @@ import Login from './components/auth/LoginModal';
 class App extends Component {
 
 
-  componentDidMount() {
-    store.dispatch(loadUser());
-  }
+  // componentDidMount() {
+  //   store.dispatch(loadUser());
+  // }
   render() {
     return (
       <Provider store={store}>
