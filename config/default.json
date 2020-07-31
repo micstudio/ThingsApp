@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://micstudio:ekwador@cluster0-ofowg.mongodb.net/pizza?retryWrites=true&w=majority",
+    "mongoURI": "{place for mongodbkey}",
     "jwtSecret": "pizza_myJWTsecret"
 }
